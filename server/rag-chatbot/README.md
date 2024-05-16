@@ -13,7 +13,10 @@ Chainlit app for advanced RAG. Uses llamaparse, langchain, qdrant and models fro
 
 ### create virtualenv
 ```
-python3 -m venv .venv && source .venv/bin/activate
+python -m venv .venv
+```
+```
+.venv/Scritps/activate
 ```
 
 ### Install packages
@@ -26,9 +29,20 @@ All env variables goes to .env ( cp `.env.sample` to `.env` and paste required e
 
 ### Run the python files (following the video to run step by step is recommended)
 ```
-python3 ingest.py
+py ingest.py
 chainlit run app.py
 ```
+
+### Any Errors while pip install like this
+```
+error: subprocess-exited-with-error
+
+× pip subprocess to install build dependencies did not run successfully.
+│ exit code: 1
+╰─> See above for output.
+```
+## Download Cmake and install it
+- [Cmake download](https://cmake.org/download/)
 
 ## Additional helper documents
 - [LlamaIndex blogpost about Llamaparse](https://www.llamaindex.ai/blog/launching-the-first-genai-native-document-parsing-platform)
