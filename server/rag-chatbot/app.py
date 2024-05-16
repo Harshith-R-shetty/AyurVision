@@ -77,10 +77,10 @@ async def start():
     sends a welcome message, and stores the bot instance in the user's session.
     """
     chain = qa_bot()
-    welcome_message = cl.Message(content="Starting the bot...")
+    welcome_message = cl.Message(content="Starting the AyurVison...")
     await welcome_message.send()
     welcome_message.content = (
-        "Hi, Welcome to Chat With Documents using Llamaparse, LangChain, Qdrant and models from Groq."
+        "Hi, Welcome to AyurVision....."
     )
     await welcome_message.update()
     cl.user_session.set("chain", chain)
@@ -99,9 +99,10 @@ async def main(message):
     chain = cl.user_session.get("chain")
     cb = cl.AsyncLangchainCallbackHandler()
     cb.answer_reached = True
+    print(message)
     # res=await chain.acall(message, callbacks=[cb])
     res = await chain.acall(message.content, callbacks=[cb])
-    # print(f"response: {res}")
+    print(f"response: {res}")
     answer = res["result"]
     # answer = answer.replace(".", ".\n")
     source_documents = res["source_documents"]
