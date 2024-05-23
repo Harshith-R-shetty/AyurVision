@@ -23,37 +23,75 @@ qdrant_url = os.getenv("QDRANT_URL")
 qdrant_api_key = os.getenv("QDRANT_API_KEY")
 prakriti = os.getenv('PRAKRITI').lower()
 
+# kapha
+# Get plenty of exercise
+# Avoid heavy foods
+# Keep active
+# Vary your routine
+# Avoid dairy foods
+# Avoid iced food and drinks
+# Avoid fatty or oily foods
+# Eat light, dry food
+
 custom_prompt_template_kapha = """Use the following pieces of information to answer the user's question.
 If you don't know the answer, just say that you don't know, don't try to make up an answer.Be friendly to the user
 and respond appropriately.
 this user has kapha prakriti and this is taken from the test the user gave on our website.
+person  is  likely  to  become  obese, which  is  one  of  the  main  causes  of  diabetes,hypertension, and heart attack.
+Morning is not their time. They prefer midday.
+Vigorous exercise is good for them.
+food, such as watermelon, sweet, fruits, candy, cookies,cold and frozen food, yogurt and other dairy products are to be avoided.
+colds,  flu,  sinus congestion  and  other  diseases  involving  mucus, such as bronchial congestion.
 Context: {context}
 Question: {question}
 
 Only return the helpful answer below and nothing else.
-Answer general questions normally.
 Helpful answer:
 """
+# vata
+# Avoid raw foods
+# Avoid cold foods
+# Avoid extreme cold temperatures
+# Eat warm foods and spices
+# Keep a regular routine
+
 custom_prompt_template_vata = """Use the following pieces of information to answer the user's question.
 If you don't know the answer, just say that you don't know, don't try to make up an answer.Be friendly to the user
 and respond appropriately.
 this user has vata prakriti and this is taken from the test the user gave on our webiste.
+Raw vegetables causes imbalance in vata.
+Constipation is one of their most common ailments.
+they tend to have less stamina, they can easily get strained or overtired.
+sugar, caffeine, and alcohol is not good for vata prakriti, as does exposure to cold weather and cold foods.
 Context: {context}
 Question: {question}
 
 Only return the helpful answer below and nothing else.
-Answer general questions normally.
 Helpful answer:
 """
+
+# pitta
+# Avoid excessive heat
+# Avoid excessive oil
+# Avoid excessive steam
+# Limit salt intake
+# Eat cooling, nonspicy foods
+# Drink cool(but not iced) drinks
+# Exercise during the cooler part of the day
 custom_prompt_template_pitta = """Use the following pieces of information to answer the user's question.
 If you don't know the answer, just say that you don't know, don't try to make up an answer.Be friendly to the user
 and respond appropriately.
-this user has pitta prakriti and this is taken from the test the user gave on our website.
+this user has pitta prakriti and this is taken from the test the user gave on our website
+they have a low tolerance for hot weather, sunshine, or hard physical work.
+Conditions such as ulcers, skin diseases, bleeding disorders.
+Pittas have a strong appetite, strong metabolism, and strong digestion.
+Pittas are night people. They become alert around midnight and love to read late at night.
+eating spicy food, sour and citrus foods causes imbalance in pitta.
+Use the above characteristics to give personalised suggestions.
 Context: {context}
 Question: {question}
 
 Only return the helpful answer below and nothing else.
-Answer general questions normally.
 Helpful answer:
 """
 custom_prompt_template = """Use the following pieces of information to answer the user's question.
@@ -64,7 +102,6 @@ Context: {context}
 Question: {question}
 
 Only return the helpful answer below and nothing else.
-Answer general questions normally.
 Helpful answer:
 """
 
