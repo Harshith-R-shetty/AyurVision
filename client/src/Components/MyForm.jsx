@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Navbar from "./Navbar"; 
+import Navbar from "./Navbar";
 import Footer from "./Footer";
 
 const MyForm = () => {
   const [formData, setFormData] = useState({});
   const [questions, setQuestions] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionMessage, setSubmissionMessage] = useState('');
+  const [apiResponse, setApiResponse] = useState(null); // Add this line
 
   useEffect(() => {
     const data = {
@@ -81,6 +83,8 @@ const MyForm = () => {
       .post("http://localhost:3000/predict", { data: dataArray })
       .then((response) => {
         console.log(response.data);
+        setApiResponse(response.data);
+        setSubmissionMessage(`Successfully submitted.`);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -88,13 +92,17 @@ const MyForm = () => {
       .finally(() => {
         setIsSubmitting(false);
       });
+
+    setIsSubmitting(false);
+    setFormData({}); 
+
   };
 
   return (<>
-  <div style={{marginTop: '70px'}}><Navbar/></div>
-  
+    <div style={{ marginTop: '70px' }}><Navbar /></div>
+
     <div className="min-h-screen bg-green-100">
-      
+
       <div className="flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold mb-8">Prakriti Identification</h1>
         <div className="w-full max-w-3xl bg-white p-8 rounded shadow-md">
@@ -121,21 +129,27 @@ const MyForm = () => {
             ))}
             <button
               type="submit"
-              className={`w-full py-2 px-4 rounded ${
-                isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-indigo-600 text-white hover:bg-green-500 transition duration-200'
-              }`}
+              className={`w-full py-2 px-4 rounded ${isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-indigo-600 text-white hover:bg-green-500 transition duration-200'
+                }`}
               disabled={isSubmitting}
             >
               {isSubmitting ? 'Submitting...' : 'Submit'}
             </button>
+            {submissionMessage && <p className="text-center mt-4">{submissionMessage}</p>}
+            {apiResponse && (
+              <div className="text-center mt-4">
+                <p>Your Prakriti:</p>
+                <pre>{JSON.stringify(apiResponse, null, 2)}</pre>
+              </div>
+            )}
           </form>
         </div>
       </div>
     </div>
     <div>
-      <Footer/>
+      <Footer />
     </div>
-    </>
+  </>
   );
 };
 
